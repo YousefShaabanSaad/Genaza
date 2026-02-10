@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">جنازة</string>
+    <string name="search">بحث</string>
+    <string name="noDataAvailable">لا توجد بيانات</string>
+    <string name="addDead">إضافة ميت</string>
+</resources>

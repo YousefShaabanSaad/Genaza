@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Genaza</string>
+    <string name="search">Search</string>
+    <string name="noDataAvailable">No data available</string>
+    <string name="addDead">Add dead</string>
+</resources>

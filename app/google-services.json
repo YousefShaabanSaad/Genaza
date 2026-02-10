@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "960919206440",
+    "project_id": "ganaza-0",
+    "storage_bucket": "ganaza-0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960919206440:android:e1aa331c41d3982c65531d",
+        "android_client_info": {
+          "package_name": "com.yousef.genaza"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaUhmp_d2CRJGn8hWIiyCr6czP-E4SXgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
