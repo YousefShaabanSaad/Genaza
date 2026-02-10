@@ -4,4 +4,9 @@
     <string name="search">Search</string>
     <string name="noDataAvailable">No data available</string>
     <string name="addDead">Add dead</string>
+    <string name="name">Dead name</string>
+    <string name="phone">Phone</string>
+    <string name="timePlace">مكان وموعد الجنازة مثال(بعد صلاة العشاء عند مسجد النور)</string>
+    <string name="notes">ملاحظات ( مثال: زوجة الأستاذ فلان الفلاني )</string>
+    <string name="save">Save</string>
 </resources>

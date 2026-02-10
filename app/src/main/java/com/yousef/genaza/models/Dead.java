@@ -4,9 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Dead {
+public class Dead implements Serializable {
     private String Id, IdOwner, Name, Phone, Photo, Notes, TimePlace;
     private Timestamp Timestamp;
     private int Status;
