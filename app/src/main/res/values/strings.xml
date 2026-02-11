@@ -9,4 +9,7 @@
     <string name="timePlace">مكان وموعد الجنازة مثال(بعد صلاة العشاء عند مسجد النور)</string>
     <string name="notes">ملاحظات ( مثال: زوجة الأستاذ فلان الفلاني )</string>
     <string name="save">Save</string>
+    <string name="send">Send</string>
+    <string name="edit">Edit</string>
+    <string name="sendDone">Send done</string>
 </resources>

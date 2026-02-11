@@ -19,7 +19,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_180sdp">
+            android:layout_height="@dimen/_200sdp">
 
             <ProgressBar
                 android:id="@+id/progress"

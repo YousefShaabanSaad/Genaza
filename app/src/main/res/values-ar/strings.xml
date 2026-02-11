@@ -8,5 +8,8 @@
     <string name="phone">رقم الهاتف</string>
     <string name="timePlace">مكان وموعد الجنازة مثال(بعد صلاة العشاء عند مسجد النور)</string>
     <string name="notes">ملاحظات ( مثال: زوجة الأستاذ فلان الفلاني )</string>
-    <string name="save">Save</string>
+    <string name="save">حفظ</string>
+    <string name="send">إرسال بيانات المتوفي</string>
+    <string name="edit">تعديل بيانات المتوفي</string>
+    <string name="sendDone">تم إرسال بيانات المتوفي</string>
 </resources>

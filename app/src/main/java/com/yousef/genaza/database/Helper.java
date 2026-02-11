@@ -1,13 +1,16 @@
 package com.yousef.genaza.database;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Base64;
+
+import com.yousef.genaza.R;
 
 import java.io.ByteArrayOutputStream;
 import java.security.SecureRandom;
+import java.util.Objects;
 
 public class Helper {
     private final Context context;
@@ -34,9 +37,19 @@ public class Helper {
     }
 
     public String bitmapToBase64(Bitmap bitmap){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
-        byte[] imageBytes = baos.toByteArray();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
+        byte[] imageBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
+
+    // Create and return a progress dialog
+    public Dialog createProgress(){
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.progress);
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.setCancelable(false);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        return dialog;
     }
 }

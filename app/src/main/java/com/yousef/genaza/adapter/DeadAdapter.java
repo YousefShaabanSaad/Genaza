@@ -41,7 +41,7 @@ public class DeadAdapter extends RecyclerView.Adapter<DeadAdapter.MyHolder> {
         holder.note.setText(model.getNotes());
 
         Glide.with(context)
-                .load(model.getPhoto())
+                .load(model.getPhotoBitmap())
                 .error(R.drawable.bg_image)
                 .into(holder.photo);
     }

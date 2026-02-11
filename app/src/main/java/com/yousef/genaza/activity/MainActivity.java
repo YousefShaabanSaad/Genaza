@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import com.google.firebase.Timestamp;
 import com.yousef.genaza.R;
 import com.yousef.genaza.adapter.DeadAdapter;
 import com.yousef.genaza.database.Repository;
@@ -22,12 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Constants, ItemsListener<Dead> {
-
     private Repository repository;
     private ActivityMainBinding binding;
     private DeadAdapter adapter;
-    private List<Dead> list;
-    private String idOwner;
+    private List<Dead> allList, list;
+    private String uid;
     private Dead dead;
 
     @Override
@@ -43,11 +43,12 @@ public class MainActivity extends AppCompatActivity implements Constants, ItemsL
         });
 
         repository = new Repository(this);
-        idOwner =repository.getString(ID_USER, "");
-        if(idOwner.isEmpty())
-            repository.putString(ID_USER, repository.generateRandomID());
+        uid =repository.getString(UID, "");
+        if(uid.isEmpty())
+            repository.putString(UID, repository.generateRandomID());
 
         dead = new Dead();
+        allList = new ArrayList<>();
         list = new ArrayList<>();
         adapter = new DeadAdapter(this, list);
         binding.recyclerView.setAdapter(adapter);
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements Constants, ItemsL
 
         binding.myItem.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddActivity.class);
-            intent.putExtra(DEAD, dead);
+            intent.putExtra(DEAD_ID, dead.getId());
             startActivity(intent);
         });
     }
@@ -66,31 +67,45 @@ public class MainActivity extends AppCompatActivity implements Constants, ItemsL
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void getItems(List<Dead> items) {
+
+        allList.clear();
+        allList.addAll(items);
         list.clear();
-        list.addAll(items);
-        if (list.isEmpty()){
+
+        Timestamp now = Timestamp.now();
+        boolean hasMyPending = false;
+
+        for (Dead item : allList) {
+            if(item.getStatus() == -1 && uid.equals(item.getUid())){
+                dead = item;
+                hasMyPending = true;
+                continue;
+            }
+
+            if(item.getStatus() == 1 && item.getTimestamp() != null && item.getTimestamp().compareTo(now) >= 0){
+                list.add(item);
+            }
+        }
+
+        binding.myItem.setVisibility(hasMyPending ? View.VISIBLE : View.GONE);
+
+        if(list.isEmpty()){
             binding.noDataAvailable.setVisibility(View.VISIBLE);
             binding.recyclerView.setVisibility(View.GONE);
-        }
-        else {
-            boolean found = false;
-            for (Dead item : list) {
-                if (item.getIdOwner().equals(idOwner)) {
-                    found = true;
-                    dead = item;
-                    break;
-                }
-            }
-            binding.myItem.setVisibility(found ? View.VISIBLE : View.GONE);
+        } else {
             binding.noDataAvailable.setVisibility(View.GONE);
             binding.recyclerView.setVisibility(View.VISIBLE);
         }
+
         adapter.notifyDataSetChanged();
-        binding.progress.setVisibility(View.GONE);
+        binding.searchCard.setVisibility(View.VISIBLE);
+        binding.progressContainer.setVisibility(View.GONE);
     }
+
 
     @Override
     public void failGetItems(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+        System.out.println(error);
     }
 }

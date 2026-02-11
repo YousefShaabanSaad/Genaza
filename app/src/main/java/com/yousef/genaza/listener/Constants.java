@@ -2,8 +2,8 @@ package com.yousef.genaza.listener;
 
 public interface Constants {
     String APP = "Genaza";
-    String ID_USER = "IdUser";
+    String UID = "uid";
     String DEAD = "Dead";
-    String DATE_GENAZA = "dateGenaza";
+    String DEAD_ID = "id";
     String STATUS = "status";
 }

@@ -3,12 +3,11 @@ package com.yousef.genaza.models;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.Exclude;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-
-public class Dead implements Serializable {
-    private String Id, IdOwner, Name, Phone, Photo, Notes, TimePlace;
+public class Dead {
+    private String Id, Uid, Name, Phone, Photo, Notes, TimePlace;
     private Timestamp Timestamp;
     private int Status;
 
@@ -21,12 +20,12 @@ public class Dead implements Serializable {
         Id = id;
     }
 
-    public String getIdOwner() {
-        return IdOwner;
+    public String getUid() {
+        return Uid;
     }
 
-    public void setIdOwner(String idOwner) {
-        IdOwner = idOwner;
+    public void setUid(String uid) {
+        Uid = uid;
     }
 
     public String getName() {
@@ -45,13 +44,8 @@ public class Dead implements Serializable {
         Phone = phone;
     }
 
-    public Bitmap getPhoto() {
-        return base64ToBitmap(Photo);
-    }
-
-    private Bitmap base64ToBitmap(String base64){
-        byte[] bytes = Base64.decode(base64, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+    public String getPhoto() {
+        return Photo;
     }
 
     public void setPhoto(String photo) {
@@ -88,5 +82,15 @@ public class Dead implements Serializable {
 
     public void setStatus(int status) {
         Status = status;
+    }
+
+    @Exclude
+    public Bitmap getPhotoBitmap() {
+        return base64ToBitmap(Photo);
+    }
+    @Exclude
+    private Bitmap base64ToBitmap(String base64){
+        byte[] bytes = Base64.decode(base64, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
     }
 }
