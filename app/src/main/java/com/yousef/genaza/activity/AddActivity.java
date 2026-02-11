@@ -55,11 +55,12 @@ public class AddActivity extends AppCompatActivity implements Constants, ItemLis
         else
             binding.main.setVisibility(View.VISIBLE);
 
-        binding.card.setOnClickListener(v ->
+        binding.uploadBox.setOnClickListener(v ->
                 ImagePicker.with(this)
                         .crop(3f, 2f)
                         .compress(512)
                         .maxResultSize(900, 600)
+                        .galleryOnly()
                         .start()
         );
         binding.send.setOnClickListener(v -> save());
@@ -95,11 +96,10 @@ public class AddActivity extends AppCompatActivity implements Constants, ItemLis
     public void getItem(Dead item) {
         dead = item;
         Bitmap bmp = dead.getPhotoBitmap();
-        if(bmp != null){
+        if(bmp != null)
             binding.photo.setImageBitmap(bmp);
-        }else{
+        else
             binding.photo.setImageResource(R.drawable.bg_image);
-        }
 
         binding.name.setText(dead.getName() != null ? dead.getName() : "");
         binding.phone.setText(dead.getPhone() != null ? dead.getPhone() : "");

@@ -12,4 +12,7 @@
     <string name="send">Send</string>
     <string name="edit">Edit</string>
     <string name="sendDone">Send done</string>
+    <string name="download">Download Photo</string>
+    <string name="open_camera">Open gallery</string>
+    <string name="supportImage">Supports: JPG, JPEG2000, PNG</string>
 </resources>

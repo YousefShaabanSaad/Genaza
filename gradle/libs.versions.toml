@@ -12,8 +12,8 @@ firebaseFirestore = "26.1.0"
 sdp       = "1.1.1"
 ssp       = "1.1.1"
 imagePickerVer = "2.1"
-glide = "4.16.0"
-
+glide = "5.0.5"
+photoView = "2.3.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -29,6 +29,7 @@ ssp = { group = "com.intuit.ssp", name = "ssp-android", version.ref = "ssp" }
 imagePicker = { group = "com.github.Dhaval2404", name = "ImagePicker", version.ref = "imagePickerVer" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glideCompiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+chrisbanes = { module = "com.github.chrisbanes:PhotoView", version.ref = "photoView" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
