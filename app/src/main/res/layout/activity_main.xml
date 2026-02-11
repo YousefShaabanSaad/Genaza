@@ -10,18 +10,58 @@
     tools:context="com.yousef.genaza.activity.MainActivity">
 
     <LinearLayout
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:src="@mipmap/ic_launcher"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/hijriDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <TextClock
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:format12Hour="hh:mm a"
+                android:format24Hour="hh:mm a"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12ssp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/searchCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="-15dp"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_12sdp">
+        android:layout_marginHorizontal="@dimen/_10sdp">
 
-        <!-- SearchView أنيق مع CardView -->
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -52,13 +92,11 @@
 
     </LinearLayout>
 
-    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_12sdp"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/searchCard"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -67,7 +105,6 @@
         tools:listitem="@layout/item_dead"
         tools:itemCount="3"/>
 
-    <!-- ProgressBar مع خلفية نصف شفافة -->
     <FrameLayout
         android:id="@+id/progressContainer"
         android:layout_width="0dp"
@@ -86,7 +123,6 @@
             android:layout_gravity="center"/>
     </FrameLayout>
 
-    <!-- رسالة عند عدم وجود بيانات -->
     <TextView
         android:id="@+id/noDataAvailable"
         android:layout_width="wrap_content"
@@ -99,7 +135,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- FAB -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add"
         android:layout_width="56dp"

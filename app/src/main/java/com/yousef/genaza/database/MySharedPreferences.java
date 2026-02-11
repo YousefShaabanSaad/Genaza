@@ -25,4 +25,15 @@ public class MySharedPreferences implements Constants {
         // Retrieve a Boolean value from SharedPreferences
         return sharedPreferences.getString(key, defValue);
     }
+
+    public void putBoolean(String key, boolean value) {
+        // Store a int value in SharedPreferences
+        editor.putBoolean(key, value);
+        editor.apply();
+    }
+
+    public boolean getBoolean(String key, boolean defValue) {
+        // Retrieve a Boolean value from SharedPreferences
+        return sharedPreferences.getBoolean(key, defValue);
+    }
 }

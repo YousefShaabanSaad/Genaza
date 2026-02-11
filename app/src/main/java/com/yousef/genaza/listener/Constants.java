@@ -5,5 +5,10 @@ public interface Constants {
     String UID = "uid";
     String DEAD = "Dead";
     String DEAD_ID = "id";
+    String PHOTO = "photo";
+    String NAME = "name";
     String STATUS = "status";
+    String CHANNEL_NAME= "Genaza";
+    String CHANNEL_DESCRIPTION = "Genaza notifications";
+    String CHANNEL_ID = "genaza_id";
 }

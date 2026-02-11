@@ -50,6 +50,8 @@ dependencies {
     implementation(libs.glide)
     annotationProcessor(libs.glideCompiler)
 
+    implementation(libs.chrisbanes)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
