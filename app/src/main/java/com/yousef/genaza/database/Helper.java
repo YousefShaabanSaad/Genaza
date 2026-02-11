@@ -143,23 +143,19 @@ public class Helper implements Constants {
 
 
     public void sendNotification(Dead item) {
+        NotificationCompat.BigPictureStyle style = new NotificationCompat.BigPictureStyle()
+                .bigPicture(item.getPhotoBitmap())
+                .setSummaryText(item.getTimePlace());
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                         .setSmallIcon(R.mipmap.ic_launcher_foreground)
                         .setContentTitle(item.getName())
                         .setContentText(item.getTimePlace())
-                        .setStyle(new NotificationCompat.BigTextStyle().bigText(item.getTimePlace()))
+                        .setStyle(style)
                         .setContentIntent(getPendingIntent())
                         .setAutoCancel(true);
 
-
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         NotificationManagerCompat.from(context).notify((int) System.currentTimeMillis(), builder.build());
