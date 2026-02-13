@@ -11,4 +11,11 @@ public interface Constants {
     String CHANNEL_NAME= "Genaza";
     String CHANNEL_DESCRIPTION = "Genaza notifications";
     String CHANNEL_ID = "genaza_id";
+    String TITLE = "title";
+    String BODY = "body";
+    String TARGET = "target";
+
+    String USER = "user";
+    String ADMIN = "admin";
+    String BASE_URL ="https://fcm-firebase.vercel.app/api/send";
 }

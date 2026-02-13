@@ -2,7 +2,6 @@ package com.yousef.genaza.database;
 
 import android.Manifest;
 import android.app.Dialog;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -129,18 +128,6 @@ public class Helper implements Constants {
                 PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
         );
     }
-    public Notification startNotification(){
-        return new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setContentTitle("تطبيق جنازة")
-                .setContentText("إترك هذا الإشعار لمتابعة حالات الوفاة")
-                .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setContentIntent(getPendingIntent())
-                .setPriority(NotificationCompat.PRIORITY_LOW)
-                .setOngoing(true)
-                .setAutoCancel(false)
-                .build();
-    }
-
 
     public void sendNotification(Dead item) {
         NotificationCompat.BigPictureStyle style = new NotificationCompat.BigPictureStyle()

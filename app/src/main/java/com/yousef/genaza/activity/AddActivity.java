@@ -57,9 +57,8 @@ public class AddActivity extends AppCompatActivity implements Constants, ItemLis
 
         binding.uploadBox.setOnClickListener(v ->
                 ImagePicker.with(this)
-                        .crop(3f, 2f)
-                        .compress(512)
-                        .maxResultSize(900, 600)
+                        .crop(3f, 4f)
+                        .maxResultSize(600, 800)
                         .galleryOnly()
                         .start()
         );
@@ -85,7 +84,7 @@ public class AddActivity extends AppCompatActivity implements Constants, ItemLis
                 Uri uri = data.getData();
                 binding.photo.setImageURI(uri);
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                dead.setPhoto(repository.bitmapToBase64(bitmap));
+                dead.setZPhoto(repository.bitmapToBase64(bitmap));
             } catch (Exception error){
                 Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }

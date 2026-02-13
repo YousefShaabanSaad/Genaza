@@ -17,14 +17,14 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
+            android:layout_height="@dimen/_250sdp"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardBackgroundColor="@color/white">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/uploadBox"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_200sdp"
+                android:layout_height="@dimen/_250sdp"
                 android:orientation="vertical"
                 android:gravity="center">
 
@@ -33,6 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/bg_image"
+                    android:scaleType="centerCrop"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -40,14 +41,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@string/open_camera"
-                    android:textColor="#1A1A1A"
-                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/supportImage"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-                <!-- النص الثانوي -->
                 <TextView
                     android:id="@+id/supportImage"
                     android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/supportImage"
                     android:textColor="#808080"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_10ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

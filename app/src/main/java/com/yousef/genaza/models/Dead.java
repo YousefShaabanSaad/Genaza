@@ -7,7 +7,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.Exclude;
 
 public class Dead {
-    private String Id, Uid, Name, Phone, Photo, Notes, TimePlace;
+    private String Id, Uid, Name, Phone, ZPhoto, Notes, TimePlace;
     private Timestamp Timestamp;
     private int Status;
 
@@ -44,12 +44,12 @@ public class Dead {
         Phone = phone;
     }
 
-    public String getPhoto() {
-        return Photo;
+    public String getZPhoto() {
+        return ZPhoto;
     }
 
-    public void setPhoto(String photo) {
-        Photo = photo;
+    public void setZPhoto(String zPhoto) {
+        ZPhoto = zPhoto;
     }
 
     public String getNotes() {
@@ -86,7 +86,7 @@ public class Dead {
 
     @Exclude
     public Bitmap getPhotoBitmap() {
-        return base64ToBitmap(Photo);
+        return base64ToBitmap(ZPhoto);
     }
     @Exclude
     private Bitmap base64ToBitmap(String base64){

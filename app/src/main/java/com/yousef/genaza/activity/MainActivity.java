@@ -25,8 +25,6 @@ import com.yousef.genaza.databinding.ActivityMainBinding;
 import com.yousef.genaza.listener.Constants;
 import com.yousef.genaza.listener.ItemsListener;
 import com.yousef.genaza.models.Dead;
-import com.yousef.genaza.service.MyForegroundService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,12 +101,8 @@ public class MainActivity extends AppCompatActivity implements Constants, ItemsL
         });
     }
     private void startService(){
-        Intent serviceIntent = new Intent(this, MyForegroundService.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(serviceIntent);
-        } else {
-            startService(serviceIntent);
-        }
+        repository.subscribeToTopic();
+        repository.createNotificationChannel();
     }
 
     @Override
@@ -170,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements Constants, ItemsL
     @Override
     public void clickItem(Dead item) {
         Intent intent = new Intent(this, ViewImageActivity.class);
-        intent.putExtra(PHOTO, item.getPhoto());
+        intent.putExtra(PHOTO, item.getZPhoto());
         intent.putExtra(NAME, item.getName());
         startActivity(intent);
     }

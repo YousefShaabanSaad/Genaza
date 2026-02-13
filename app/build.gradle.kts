@@ -41,7 +41,11 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.analytics)
 
     implementation(libs.sdp)
     implementation(libs.ssp)
@@ -51,6 +55,8 @@ dependencies {
     annotationProcessor(libs.glideCompiler)
 
     implementation(libs.chrisbanes)
+
+    implementation(libs.okhttp3)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

@@ -1,7 +1,6 @@
 package com.yousef.genaza.database;
 
 import android.app.Dialog;
-import android.app.Notification;
 import android.content.Context;
 import android.graphics.Bitmap;
 import com.yousef.genaza.listener.ItemListener;
@@ -43,10 +42,6 @@ public class Repository {
     public void createNotificationChannel() {
         helper.createNotificationChannel();
     }
-
-    public Notification startNotification(){
-        return helper.startNotification();
-    }
     public void sendNotification(Dead item) {
         helper.sendNotification(item);
     }
@@ -59,14 +54,6 @@ public class Repository {
         return sharedPreferences.getString(key, defValue);
     }
 
-    public void putBoolean(String key, boolean value) {
-        sharedPreferences.putBoolean(key, value);
-    }
-
-    public boolean getBoolean(String key, boolean defValue) {
-        return sharedPreferences.getBoolean(key, defValue);
-    }
-
     // TODO MyFirebase
     public void addOrEditDead(Dead dead, ItemListener<Dead> listener){
        firebase.addOrEditDead(dead, listener);
@@ -77,5 +64,9 @@ public class Repository {
     }
     public void getDeadByID(String id, ItemListener<Dead> listener){
         firebase.getDeadByID(id, listener);
+    }
+
+    public void subscribeToTopic(){
+        firebase.subscribeToTopic();
     }
 }

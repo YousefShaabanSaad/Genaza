@@ -2,6 +2,8 @@ package com.yousef.genaza.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -35,7 +37,7 @@ public class ViewImageActivity extends AppCompatActivity implements Constants {
         });
 
         Dead dead= new Dead();
-        dead.setPhoto(Objects.requireNonNull(getIntent().getExtras()).getString(PHOTO));
+        dead.setZPhoto(Objects.requireNonNull(getIntent().getExtras()).getString(PHOTO));
          bitmap = dead.getPhotoBitmap();
         if(bitmap != null)
             binding.imageView.setImageBitmap(bitmap);
@@ -46,40 +48,82 @@ public class ViewImageActivity extends AppCompatActivity implements Constants {
     }
 
     private void saveToGallery() {
+
         try {
+            // تأكد من الصورة الأصلية
+            if (bitmap == null) {
+                Toast.makeText(this, "❌ الصورة الأصلية غير موجودة", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // تحميل اللوجو من drawable
+            Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+
+            if (logo == null) {
+                Toast.makeText(this, "❌ اللوجو غير موجود داخل drawable", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            // إنشاء صورة جديدة للرسم
+            Bitmap result = Bitmap.createBitmap(
+                    bitmap.getWidth(),
+                    bitmap.getHeight(),
+                    Bitmap.Config.ARGB_8888
+            );
+
+            Canvas canvas = new Canvas(result);
+
+            // رسم الصورة الأصلية
+            canvas.drawBitmap(bitmap, 0, 0, null);
+
+            // تصغير اللوجو تلقائيًا
+            int logoWidth = bitmap.getWidth() / 5; // 20% من عرض الصورة
+            int logoHeight = logo.getHeight() * logoWidth / logo.getWidth();
+
+            Bitmap resizedLogo = Bitmap.createScaledBitmap(logo, logoWidth, logoHeight, true);
+
+            // مكان اللوجو (أسفل يمين)
+            int margin = 25;
+            int left = bitmap.getWidth() - logoWidth - margin;
+
+            canvas.drawBitmap(resizedLogo, left, margin, null);
+
+            // مسار الحفظ
             File picturesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
             File appDir = new File(picturesDir, APP);
 
-            // تحقق من وجود المجلد أو إنشاءه
-            if (!appDir.exists()) {
-                boolean created = appDir.mkdirs();
-                if (!created) {
-                    Toast.makeText(this, "❌ فشل إنشاء مجلد التطبيق", Toast.LENGTH_SHORT).show();
-                    return; // اوقف العملية
-                }
+            if (!appDir.exists() && !appDir.mkdirs()) {
+                Toast.makeText(this, "❌ فشل إنشاء مجلد", Toast.LENGTH_SHORT).show();
+                return;
             }
 
-            // اسم جديد للصورة
-            String fileName = Objects.requireNonNull(getIntent().getExtras())
-                    .getString(NAME,"Image_"+System.currentTimeMillis()) + ".jpg";
-            File destFile = new File(appDir, fileName);
+            // اسم الصورة
+            Bundle extras = getIntent().getExtras();
+            String fileName = "Image_" + System.currentTimeMillis();
 
-            FileOutputStream out = new FileOutputStream(destFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, out);
+            if (extras != null && extras.containsKey(NAME)) {
+                fileName = extras.getString(NAME, fileName);
+            }
+
+            fileName += ".jpg";
+
+            File file = new File(appDir, fileName);
+
+            FileOutputStream out = new FileOutputStream(file);
+            result.compress(Bitmap.CompressFormat.JPEG, 90, out);
             out.flush();
             out.close();
 
-            // أحيانًا تحتاج إعلام المعرض لتحديث الصورة
-            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            mediaScanIntent.setData(Uri.fromFile(destFile));
-            sendBroadcast(mediaScanIntent);
+            // تحديث المعرض
+            Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            scanIntent.setData(Uri.fromFile(file));
+            sendBroadcast(scanIntent);
 
-            Toast.makeText(this, "✅ تم حفظ الصورة في المعرض", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "✅ تم حفظ الصورة", Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             Toast.makeText(this, "❌ فشل حفظ الصورة", Toast.LENGTH_SHORT).show();
         }
     }
-
 
 }
